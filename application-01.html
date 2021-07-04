@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hello world wow za hahah</title>
+    <title>application-01</title>
     <link rel="shortcut icon" href="./img/svg/logo.svg" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
@@ -15,7 +15,7 @@
     <!-- ! Body -->
     <a class="skip-link sr-only" href="#skip-target">Skip to content</a>
     <div class="page-flex">
-  
+
         <aside class="sidebar">
             <div class="sidebar-start">
                 <div class="sidebar-head">
@@ -35,10 +35,10 @@
                 <div class="sidebar-body">
                     <ul class="sidebar-body-menu">
                         <li>
-                            <a class="active" href="/"><span class="icon home" aria-hidden="true"></span>Home</a>
+                            <a href="/"><span class="icon home" aria-hidden="true"></span>Home</a>
                         </li>
                         <li>
-                            <a class="show-cat-btn" href="##">
+                            <a class="show-cat-btn active" href="##">
                                 <span class="icon category" aria-hidden="true"></span>Application
                                 <span class="category__btn transparent-btn" title="Open list">
                                     <span class="sr-only">Open list</span>
@@ -47,7 +47,7 @@
                             </a>
                             <ul class="cat-sub-menu">
                                 <li>
-                                    <a href="application-01.html">Application-01</a>
+                                    <a class="active" href="application-01.html">Application-01</a>
                                 </li>
                                 <li>
                                     <a href="application-02.html">Application-02</a>
@@ -82,7 +82,7 @@
                 </div>
             </div>
         </aside>
-        
+
         <div class="main-wrapper">
 
             <nav class="main-nav--bg">
@@ -99,37 +99,68 @@
                 </div>
             </nav>
 
-            
+
             <main class="main users chart-page" id="skip-target">
                 <div class="container">
-                    <h2 class="main-title">F**king welcome!</h2>
-                    
+                    <h2 class="main-title">Application-01</h2>
+
                     <div class="row stat-cards">
                         <div class="col-xl-12">
                             <article class="stat-cards-item">
                                 <div class="stat-cards-info">
-                                    <h2 class="main-title">เปิดในคอมเท่านั้นนะ ของฟรีก็งี้แหละ ขี้เกียจเขียน css นะ</h2>
-                                    <h1 class="stat-cards-info__num">
-                                        กด Application ตรงเมนูด้านซ้ายเเล้วเลือกทำเลย :) <br>
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/WKt_NGLQnR4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                                        
-                                    </h1>
-                                    <p class="stat-cards-info__title">ต้นก้าสุดเท่</p>
+                                    <h2 class="main-title">Movie Api</h2>
+                                    <div class="stat-cards-info__num col-xl-12">
+                                        สร้างเว็ปสำหรับค้นหารายชื่อหนัง รายละเอียดหนัง โดยใช้ API ของ imdb โดยใช้
+                                        ENDPOINT ดังนี้ <br><br>
+                                        https://api.themoviedb.org/3/search/movie?api_key=fe75b6f9a90b50b99afb931b2c5b0c7d&query=<u>ชื่อหนัง</u>&page=<u>หน้าที่</u>
+                                        <br><br>
+                                        โดยแต่ละหน้าจะมีหนังหน้าละ 20 เรื่อง (เปลี่ยนแค่ค่า query และ page เท่านั้น
+                                        หรือจะไปสร้าง api_key ของตัวเองก็ได้แต่เค้าสร้างมาให้เเล้ว) <br><br>
+                                        <h2 class="main-title">Example</h2>
+                                        #1
+                                        <img src="./img/1.png"> <br><br>
+                                        #2
+                                        <img src="./img/2.png"> <br><br><br><br>
+
+                                        <h2 class="main-title">Api Test (ชื่อหนัง / หน้า)</h2>
+                                        <input type="text" value="" placeholder="ชื่อหนัง" id="name" onchange="test()">
+                                        <input type="number" value="1" placeholder="หน้าที่" id="page" onchange="test()"> 
+                                        <br> <br> <br>
+                                        <iframe width="100%" frameborder="2" id="iff"></iframe> 
+                                        เอาค่าไปใส่ใน https://jsongrid.com/json-grid จะเห็นรายชื่อหนัง <br><br> <br><br><br><br>
+                                        <hr>
+                                        <h2 class="main-title">Example</h2>
+                                        <img src="./img/4.png"> <br><br>
+                                        <h2 class="main-title">Happy Hacking:)</h2>
+                                    </div>
                                 </div>
                             </article>
                         </div>
-                        
                     </div>
-
-                
                 </div>
             </main>
-
-            
         </div>
     </div>
     <script src="./plugins/chart.min.js"></script>
     <script src="plugins/feather.min.js"></script>
     <script src="js/script.js"></script>
+    <script>
+        function test(){
+            var name = document.getElementById('name').value
+            var page = document.getElementById('page').value
+            fetch(`https://api.themoviedb.org/3/search/movie?api_key=fe75b6f9a90b50b99afb931b2c5b0c7d&query=${name}&page=${page}`, {
+                method: 'get',
+            })
+            .then(response => response.text())
+            .then(data => {
+                data = JSON.parse(data)
+                data = JSON.stringify(data)
+                var iframe = document.getElementById('iff'),
+                iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+                iframedoc.body.innerHTML = data;
+            })
+        } 
+    </script>
 </body>
 
 </html>
